@@ -21,6 +21,24 @@ def parseAddressFile(addressFile):
 		addressList.append(address[0])
 	return addressList
 
+def routeAddress(table,address):
+	route = {}
+	
+	route["200.34.55.12"] = {1:4}
+	return route
+
+def route(table,address,outputFile):
+	for currentAddress in address:
+		routeMap = routeAddress(table,address)
+		if not routeMap:
+			print(currentAddress," X")
+		else:
+			#temp to check:
+			if(currentAddress!="200.34.55.12"):
+				print(currentAddress,"X")
+			else:
+				print(currentAddress,str(routeMap[currentAddress]))
+
 def main():
 	    print("************************************************************")
 	    print("Welcome to the COSC3344 Networks Project")
@@ -32,9 +50,11 @@ def main():
 	    addressFile = "inputfiles/addressinputfile1FIX.txt"
 	    table=parseTableFile(inputFile)
 	    address=parseAddressFile(addressFile)
-	    pp = pprint.PrettyPrinter(indent=4)
+	    pp = pprint.PrettyPrinter(indent=4) #using this to verify the contents of the array
 	    pp.pprint(table)
 	    pp.pprint(address)
+	    route(table,address,outputFile)
+
 		##route(table,address,outputFile)
 
 main()
